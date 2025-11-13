@@ -9,6 +9,14 @@ import random
 
 app = Flask(__name__)
 
+# Add CORS headers to all responses
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
+
 # Giphy API configuration
 GIPHY_API_KEY = os.environ.get('GIPHY_API_KEY', 'YOUR_API_KEY_HERE')
 GIPHY_API_URL = 'https://api.giphy.com/v1/gifs/search'
